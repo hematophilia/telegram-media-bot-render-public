@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: telegram-media-bot
+    runtime: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /healthz
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_WEBHOOK_SECRET
+        generateValue: true
+      - key: BOT_LOG_PATH
+        value: /tmp/bot.log
+      - key: RATE_LIMIT_DB_PATH
+        value: /tmp/request_limits.sqlite3
